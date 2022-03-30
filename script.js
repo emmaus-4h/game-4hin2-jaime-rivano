@@ -57,10 +57,14 @@ var tekenAlles = function () {
   // kogel
 
   // speler
-  fill("white");
-  rect(spelerX - 25, spelerY - 25, 50, 50);
-  fill("black");
-  ellipse(spelerX, spelerY, 10, 10);
+  fill(168, 109, 67);
+  rect(spelerX - 25, spelerY - 25, 25, 65); // broek
+  rect(spelerX, spelerY - 25, 25, 65);
+  fill("lightblue");
+  rect(spelerX - 25, spelerY - 75, 50, 60); // shirt
+  fill (222, 180, 151);
+  ellipse(spelerX, spelerY - 100, 75, 70); // hoofd
+
 
   // punten en health
 

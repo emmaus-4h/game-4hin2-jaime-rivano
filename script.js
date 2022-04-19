@@ -26,9 +26,20 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function () {
   // speler
-  if (keyIsDown(65)) {
-    spelerX = spelerX -1;
+  //voor
+  if (keyIsDown(68)) {
+    spelerX = spelerX +2;
   }
+  if (keyIsDown(65)) {
+    spelerX = spelerX -2;
+  }
+  if (keyIsDown(83)) {
+    spelerY = spelerY +2;
+  }
+  if (keyIsDown(87)) {
+    spelerY = spelerY -2;
+  }
+
   // vijand
 
   // kogel
@@ -55,18 +66,13 @@ var tekenAlles = function () {
   // achtergrond
   fill("green");
   rect(0,0,1280,720);
-  // vijand /The Rock
+  // vijand /Dwayne Johnson
 
   // kogel /Danny Devito
 
-  // speler
-  fill(168, 109, 67);
-  rect(spelerX - 25, spelerY - 25, 25, 65); // broek
-  rect(spelerX, spelerY - 25, 25, 65);
-  fill("lightblue");
-  rect(spelerX - 25, spelerY - 75, 50, 60); // shirt
+  // speler /Ryan Reynolds
   fill (222, 180, 151);
-  ellipse(spelerX, spelerY - 100, 75, 70); // hoofd
+  ellipse(spelerX, spelerY - 100, 75, 80); // hoofd
 
 
   // punten en health

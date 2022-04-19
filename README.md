@@ -1,9 +1,9 @@
 Deze game is gebaseerd op het template voor 4HV van het Emmauscollege Rotterdam
 
-## Mijn spel: *naam van het spel*
+## Mijn spel: *Reynolds adventures*
 Gemaakt door:
 - *Rivano*
-- *Jaimy*
+- *Jaime*
 
 ### Beschrijving
 *korte beschrijving van het spel, wat je kunt doen in het spel, wat het doel is*

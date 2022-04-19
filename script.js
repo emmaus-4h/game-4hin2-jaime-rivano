@@ -26,7 +26,9 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function () {
   // speler
-
+  if (keyIsDown(65)) {
+    spelerX = spelerX -1;
+  }
   // vijand
 
   // kogel
@@ -51,10 +53,11 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
+  fill("green");
+  rect(0,0,1280,720);
+  // vijand /The Rock
 
-  // vijand
-
-  // kogel
+  // kogel /Danny Devito
 
   // speler
   fill(168, 109, 67);

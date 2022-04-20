@@ -17,6 +17,9 @@ var spelStatus = SPELEN;
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 
+var vijandX = 300; // x-positie van speler
+var vijandY = 600; // y-positie van speler
+
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -52,7 +55,12 @@ var beweegAlles = function () {
  */
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
-
+  if (spelerX - vijandX <50 &&
+     vijandX - spelerX <50 &&
+     spelerY - vijandY <50 &&
+     vijandY - spelerY <50){
+    spelstatus = GAMEOVER;
+  }
   // botsing kogel tegen vijand
 
   // update punten en health
@@ -66,17 +74,30 @@ var tekenAlles = function () {
   // achtergrond
   fill("green");
   rect(0,0,1280,720);
-  // vijand /Dwayne Johnson
+  // vijand / Dwayne Johnson
+ fill (0, 0, 0);
+  ellipse (vijandX, vijandY - 100, 50, 50); // midden
+  // kogel / Steen
 
-  // kogel /Danny Devito
-
-  // speler /Ryan Reynolds
+  // speler / Ryan Reynolds
+  fill (255, 255, 255);
+  rect(spelerX, spelerY +40 - 100, 1, 25); // pijpstreep
+  fill (0, 0, 0);
+  rect(spelerX-11, spelerY +35 - 100, 22, 25); // broek
+  fill (255,255,255);
+  rect(spelerX-12, spelerY +10 - 100, 24, 25); // shirt
   fill (222, 180, 151);
-  ellipse(spelerX, spelerY - 100, 75, 80); // hoofd
+  ellipse(spelerX, spelerY - 100, 20, 20); // hoofd
+  
+  fill (0, 0, 0);
+  ellipse (spelerX, spelerY - 100, 5, 5); // midden
 
-
+  // kogel / Vuurbal
+  fill
+  
   // punten en health
 
+  // Boss / John Cena
 };
 
 /**
@@ -121,6 +142,6 @@ function draw() {
   }
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
-
+   fill(0,0,0);
   }
 }

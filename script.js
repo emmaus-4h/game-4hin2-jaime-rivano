@@ -128,6 +128,8 @@ var tekenAlles = function () {
   ellipse (spelerX, spelerY, 5, 5); // midden
 
   // kogel / Vuurbal
+  fill (252, 100, 0);
+  ellipse (kogelX, kogelY, 20, 20); // midden
   
   // punten en health
 

@@ -23,7 +23,7 @@ Basis: uitleg, spelen, afgaan en punten
         - Gebruik variabalen spelerX en spelerY als middelpunt van de speler
 - [ ] 4. *(pas de volgende stappen in de planning zelf aan)*
 - [x] x. teken je tegenspeler (vijanden of dingen die je moet pakken of doelen of ...)
-- [ ] x. teken een bal, kogel (als die in je spel zit)
+- [x] x. teken een bal, kogel (als die in je spel zit)
 - [ ] x. beweeg de tegenspeler of je bal
 - [ ] x. zet punten op het scherm 
 - [ ] x. zorg dat je punten kunt scoren

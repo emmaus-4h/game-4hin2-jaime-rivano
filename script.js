@@ -14,12 +14,14 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
+var speler;
 var spelerX = 350; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 
 var vijandX = 300; // x-positie van speler
 var vijandY = 600; // y-positie van speler
 
+var kogel;
 var kogelX = 400; // x-positie van speler
 var kogelY = 600; // y-positie van speler
 
@@ -49,6 +51,9 @@ var beweegAlles = function () {
   // vijand
 
   // kogel
+    if (keyIsDown(88)) {
+    kogelX = kogelX -2;
+  }
 };
 
 /**
@@ -65,7 +70,11 @@ var verwerkBotsing = function () {
     spelstatus === GAMEOVER;
   }
   // botsing kogel tegen vijand
-
+  if (kogelX - vijandX <36 &&
+     vijandX - kogelX <36 &&
+     kogelY - vijandY <59 &&
+     vijandY - kogelY <59){
+  }
   // update punten en health
 
 };
@@ -77,7 +86,8 @@ var tekenAlles = function () {
   // achtergrond
   fill("green");
   rect(0,0,1280,720);
-  // vijand / Dwayne Johnson 
+
+  // vijand / Dwayne Johnson
   noStroke();
   fill (140, 100, 77);
   rect(vijandX-12, vijandY +12, 24, 26); // benen

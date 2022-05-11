@@ -15,15 +15,22 @@ const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
 var speler;
-var spelerX = 350; // x-positie van speler
-var spelerY = 600; // y-positie van speler
+var spelerX = 400; // x-positie van speler
+var spelerY = 300; // y-positie van speler
+var img;
+function preload() {
+  img = loadImage('Ryan.png');
+}
+
 
 var vijandX = 300; // x-positie van speler
-var vijandY = 600; // y-positie van speler
+var vijandY = 300; // y-positie van speler
 
 var kogel;
-var kogelX = 400; // x-positie van speler
-var kogelY = 600; // y-positie van speler
+var kogelX = 500; // x-positie van speler
+var kogelY = 300; // y-positie van speler
+
+
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -67,7 +74,7 @@ var verwerkBotsing = function () {
      vijandX - spelerX <36 &&
      spelerY - vijandY <59 &&
      vijandY - spelerY <59){
-    spelstatus === GAMEOVER;
+    spelStatus = GAMEOVER;
   }
   // botsing kogel tegen vijand
   if (kogelX - vijandX <36 &&
@@ -117,22 +124,24 @@ var tekenAlles = function () {
   noStroke();
 
   fill (255,255,255);
-  rect(spelerX-12, spelerY-13, 24, 26); // torso
+  rect(spelerX-25, spelerY-13, 50, 52); // torso
   
   fill (0, 0, 0);
-  rect(spelerX-12, spelerY +11, 24, 26); // benen
+  rect(spelerX-25, spelerY +40, 50, 52); // benen
 
     fill (50, 50, 50);
-  rect(spelerX -1, spelerY +19, 2, 18); // dubbelbeen
+  rect(spelerX -1, spelerY +50, 2, 40); // dubbelbeen
 
   fill (255,255,255);
-  rect(spelerX-18, spelerY-13, 5, 24); // linkerarm
+  rect(spelerX-36, spelerY-13, 10, 35); // linkerarm
 
   fill (255,255,255);
-  rect(spelerX+13, spelerY-13, 5, 24); // rechterarm
+  rect(spelerX+31, spelerY-13, 35, 10); // rechterarm
   
   fill (222, 180, 151);
-  ellipse(spelerX, spelerY -23, 20, 20); // hoofd
+  ellipse(spelerX, spelerY -35, 40, 40); // hoofd
+
+  image(img, spelerX -30, spelerY -80, 60, 75); // Ryan
   
   fill (0, 0, 0);
   ellipse (spelerX, spelerY, 5, 5); // midden
@@ -143,7 +152,8 @@ var tekenAlles = function () {
   
   // punten en health
 
-  // Boss / John Cena
+
+  // opstakels
 };
 
 /**
@@ -182,17 +192,10 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
-    if (checkGameOver()) {
-      spelStatus = GAMEOVER;
-    if (spelStatus === GAMEOVER) {
-    fill("black");
-    rect(0,0,1280,720);
   }
-    }
-  }
-  
   if (spelStatus === GAMEOVER) {
-   fill("black");
-   rect(0,0,1280,720);
+     fill("black");
+      rect(0,0,1280,720);
+    
   }
 }

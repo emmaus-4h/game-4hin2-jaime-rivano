@@ -1,12 +1,12 @@
 Deze game is gebaseerd op het template voor 4HV van het Emmauscollege Rotterdam
 
-## Mijn spel: *Reynolds adventures*
+## Mijn spel: *Reynolds Adventures*
 Gemaakt door:
-- *Rivano*
-- *Jaime*
+- *Rivano Engeldal*
+- *Jaime Roovers*
 
 ### Beschrijving
-*korte beschrijving van het spel, wat je kunt doen in het spel, wat het doel is*
+Je zult als Ryan Reynolds Dwayne Johnson moeten verslaan, helaas voor jouw heeft hij geleerd zich te klonen! Hoeveel kan jij er verslaan?
 
 ## Mijn planning
 Werk de planning af van boven naar beneden<br>
@@ -24,10 +24,11 @@ Basis: uitleg, spelen, afgaan en punten
 - [ ] 4. *(pas de volgende stappen in de planning zelf aan)*
 - [x] x. teken je tegenspeler (vijanden of dingen die je moet pakken of doelen of ...)
 - [x] x. teken een bal, kogel (als die in je spel zit)
-- [ ] x. beweeg de tegenspeler of je bal
+- [x] x. beweeg de tegenspeler
+- [x] x. beweeg de kogel
 - [ ] x. zet punten op het scherm 
 - [ ] x. zorg dat je punten kunt scoren
-- [ ] x. zorg dat je af kunt
+- [x] x. zorg dat je af kunt
 - [ ] x. maak game-over-scherm
 - [ ] x. maak uitlegscherm
 

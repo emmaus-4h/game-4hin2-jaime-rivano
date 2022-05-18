@@ -23,7 +23,7 @@ function preload() {
 }
 
 
-var vijandX = 400; // x-positie van speler
+var vijandX = 300; // x-positie van speler
 var vijandY = 300; // y-positie van speler
 
 var kogel;
@@ -41,7 +41,6 @@ var kogelY = 300; // y-positie van speler
  */
 var beweegAlles = function () {
   // speler
-  //voor
   if (keyIsDown(68)) {
     spelerX = spelerX +2;
   }
@@ -95,7 +94,6 @@ var tekenAlles = function () {
   rect(0,0,1280,720);
 
   // vijand / Dwayne Johnson
-  var drawRock = function( vijandX , vijandY) {
   noStroke();
   fill (140, 100, 77);
   rect(vijandX-12, vijandY +12, 24, 26); // benen
@@ -120,10 +118,7 @@ var tekenAlles = function () {
   
   fill (0, 0, 0);
   ellipse (vijandX, vijandY, 5, 5); // midden
-  }
-  drawRock(200, 600);
-  drawRock(200, random);
-  drawRock(random, random);
+  
   // speler / Ryan Reynolds
 
 

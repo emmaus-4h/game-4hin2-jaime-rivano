@@ -124,24 +124,21 @@ var tekenAlles = function () {
 
   noStroke();
   fill (255,255,255);
-  rect(spelerX-25, spelerY-13, 50, 52); // torso
+  rect(spelerX-14, spelerY-15, 28, 30); // torso
   
   fill (0, 0, 0);
-  rect(spelerX-25, spelerY +40, 50, 52); // benen
+  rect(spelerX-14, spelerY +15, 28, 30); // benen
 
     fill (50, 50, 50);
-  rect(spelerX -1, spelerY +50, 2, 40); // dubbelbeen
+  rect(spelerX -1, spelerY +22, 2, 23); // dubbelbeen
 
   fill (255,255,255);
-  rect(spelerX-36, spelerY-13, 10, 35); // linkerarm
+  rect(spelerX-20, spelerY-13, 5, 33); // linkerarm
 
   fill (255,255,255);
-  rect(spelerX+31, spelerY-13, 35, 10); // rechterarm
-  
-  fill (222, 180, 151);
-  ellipse(spelerX, spelerY -35, 40, 40); // hoofd
+  rect(spelerX+15, spelerY-13, 33, 5); // rechterarm
 
-  image(img, spelerX -30, spelerY -80, 60, 75); // Ryan
+  image(img, spelerX -15, spelerY -55, 35, 40); // Ryan
   
   fill (0, 0, 0);
   ellipse (spelerX, spelerY, 5, 5); // midden

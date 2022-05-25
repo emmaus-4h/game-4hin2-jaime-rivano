@@ -17,9 +17,9 @@ var spelStatus = SPELEN;
 
 var spelerX = 400; // x-positie van speler
 var spelerY = 300; // y-positie van speler
-var img;
+var img1;
 function preload() {
-  img = loadImage('Ryan.png');
+  img1 = loadImage('Ryan.png');
 }
 
 
@@ -92,53 +92,63 @@ var tekenAlles = function () {
   // achtergrond
   fill("green");
   rect(0,0,1280,720);
-
-  // vijand / Dwayne Johnson
-  noStroke();
-  fill (140, 100, 77);
-  rect(vijandX-12, vijandY +12, 24, 26); // benen
-
-    fill (50, 50, 50);
-  rect(vijandX -1, vijandY +19, 2, 19); // dubbelbeen
   
+  //plaatjes
+  
+  
+  // vijand / Dwayne Johnson
+
+    noStroke();
   fill (140, 100, 77);
-  rect(vijandX-12, vijandY-13, 24, 26); // torso
+  rect(vijandX-14, vijandY-20, 28, 65); // torso
+  
+  fill (50, 50, 50);
+  rect(vijandX -1, vijandY +22, 2, 23); // dubbelbeen
+
+  fill (140, 100, 77);
+  rect(vijandX-24, vijandY-18, 9, 33); // linkerarm
+
+  fill (140, 100, 77);
+  rect(vijandX+15, vijandY-18, 9, 33); // rechterarm
+
+  fill (140, 100, 77);
+  rect(vijandX-5, vijandY-28, 10, 33); // nek
+  
+  var img1;
+  function preload() {
+    img1 = loadImage('Ryan.png');
+  }
+  image(img2, vijandX -17, vijandY -63, 35, 42); // Dwayne
 
   fill (0,0,0);
-  triangle(vijandX -12, vijandY +11, vijandX +12, vijandY +11, vijandX, vijandY +20); // speedo
+  triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
 
-  fill (140, 100, 77);
-  rect(vijandX-20, vijandY-13, 7, 24); // linkerarm
-
-  fill (140, 100, 77);
-  rect(vijandX+13, vijandY-13, 7, 24); // rechterarm
-  
-  fill (140, 100, 77);
-  ellipse(vijandX, vijandY -23, 20, 20); // hoofd
-  
-  fill (0, 0, 0);
-  ellipse (vijandX, vijandY, 5, 5); // midden
   
   // speler / Ryan Reynolds
-
-
   noStroke();
+  fill (242, 204, 183);
+  rect(spelerX-5, spelerY-28, 10, 33); // nek
+  
   fill (255,255,255);
   rect(spelerX-14, spelerY-15, 28, 30); // torso
   
   fill (0, 0, 0);
   rect(spelerX-14, spelerY +15, 28, 30); // benen
 
-    fill (50, 50, 50);
+  fill (50, 50, 50);
   rect(spelerX -1, spelerY +22, 2, 23); // dubbelbeen
 
   fill (255,255,255);
-  rect(spelerX-20, spelerY-13, 5, 33); // linkerarm
+  rect(spelerX-22, spelerY-13, 7, 33); // linkerarm
 
   fill (255,255,255);
-  rect(spelerX+15, spelerY-13, 33, 5); // rechterarm
+  rect(spelerX+15, spelerY-13, 33, 7); // rechterarm
 
-  image(img, spelerX -15, spelerY -55, 35, 40); // Ryan
+  var img1;
+   function preload() {
+     img1 = loadImage('Ryan.png');
+   }
+  image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
   
   fill (0, 0, 0);
   ellipse (spelerX, spelerY, 5, 5); // midden

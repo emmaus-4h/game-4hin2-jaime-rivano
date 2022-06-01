@@ -19,16 +19,28 @@ var spelerX = 400; // x-positie van speler
 var spelerY = 300; // y-positie van speler
 var img1;
 function preload() {
-  img1 = loadImage('Ryan.png');
+  img1 = loadImage('afbeeldingen/Ryan.png');
 }
 
-
-var vijandX = 300; // x-positie van speler
-var vijandY = 300; // y-positie van speler
+var vijand;
+var vijandX = 300; // x-positie van vijand
+var vijandY = 300; // y-positie van vijand
+function preload() {
+  img2 = loadImage('afbeeldingen/Rock.png');
+}
 
 var kogel;
-var kogelX = 500; // x-positie van speler
-var kogelY = 300; // y-positie van speler
+var kogelX = 500; // x-positie van kogel
+var kogelY = 300; // y-positie van kogel
+var kogelVliegt = false;
+var kogelSnelheid = 1;
+
+var targetX;
+var targetY;
+
+var fireX;
+var fireY;
+
 
 
 
@@ -57,9 +69,46 @@ var beweegAlles = function () {
   // vijand
 
   // kogel
-    if (keyIsDown(88)) {
-    kogelX = kogelX -2;
+  if (mouseIsPressed && kogelVliegt === false) {
+    targetX = mouseX;
+    targetX = mouseY;
+    fireX = spelerX;
+    fireY= spelerY;
   }
+
+  if (kogelVliegt === false && mouseIsPressed){
+    kogelVliegt = true;
+    kogelX = fireX;
+    kogelY = fireY;
+  }
+
+  var richtingY = targetY - fireY;
+  var richtingX = targetX - fireX;
+
+  var correctieSnelheid = Math.sqrt(((richtingX * richtingX)+ (richtingY * richtingY))) / 1.412
+
+  var snelheidX = richtingX / correctieSnelheid;
+  var snelheidY = richtingY / correctieSnelheid;
+
+  var snelheidX = richtingX / correctieSnelheid;
+  var snelheidY = richtingY / correctieSnelheid;
+
+var snelheidX = richtingX / correctieSnelheid;
+var snelheidY = richtingY / correctieSnelheid;
+  
+if (kogelVliegt === true) {
+  kogelX = kogelX + kogelsnelheid * snelheidX;
+}
+if (kogelVliegt === true) {
+  kogelY = kogelY + kogelsnelheid * snelheidY;
+}
+
+if (kogelVliegt === true && kogelY < 0 ||
+    kogelVliegt === true && kogelY > 720 ||
+    kogelVliegt === true && kogelX < 0 ||
+    kogelVliegt === true && kogelX > 1280){
+      kogelVliegt = false;
+    }
 };
 
 /**
@@ -76,11 +125,7 @@ var verwerkBotsing = function () {
     spelStatus = GAMEOVER;
   }
   // botsing kogel tegen vijand
-  if (kogelX - vijandX <36 &&
-     vijandX - kogelX <36 &&
-     kogelY - vijandY <59 &&
-     vijandY - kogelY <59){
-  }
+  
   // update punten en health
 
 };

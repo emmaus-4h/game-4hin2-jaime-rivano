@@ -17,17 +17,11 @@ var spelStatus = SPELEN;
 
 var spelerX = 400; // x-positie van speler
 var spelerY = 300; // y-positie van speler
-var img1;
-function preload() {
-  img1 = loadImage('afbeeldingen/Ryan.png');
-}
+
 
 var vijand;
 var vijandX = 300; // x-positie van vijand
 var vijandY = 300; // y-positie van vijand
-function preload() {
-  img2 = loadImage('afbeeldingen/Rock.png');
-}
 
 var kogel;
 var kogelX = 500; // x-positie van kogel
@@ -41,7 +35,8 @@ var targetY;
 var fireX;
 var fireY;
 
-
+var img1;
+var img2;
 
 
 /* ********************************************* */
@@ -135,40 +130,11 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
-  fill("green");
+  fill(235, 205, 122);
   rect(0,0,1280,720);
   
   //plaatjes
-  
-  
-  // vijand / Dwayne Johnson
 
-    noStroke();
-  fill (140, 100, 77);
-  rect(vijandX-14, vijandY-20, 28, 65); // torso
-  
-  fill (50, 50, 50);
-  rect(vijandX -1, vijandY +22, 2, 23); // dubbelbeen
-
-  fill (140, 100, 77);
-  rect(vijandX-24, vijandY-18, 9, 33); // linkerarm
-
-  fill (140, 100, 77);
-  rect(vijandX+15, vijandY-18, 9, 33); // rechterarm
-
-  fill (140, 100, 77);
-  rect(vijandX-5, vijandY-28, 10, 33); // nek
-  
-  var img1;
-  function preload() {
-    img1 = loadImage('Ryan.png');
-  }
-  image(img2, vijandX -17, vijandY -63, 35, 42); // Dwayne
-
-  fill (0,0,0);
-  triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
-
-  
   // speler / Ryan Reynolds
   noStroke();
   fill (242, 204, 183);
@@ -189,14 +155,33 @@ var tekenAlles = function () {
   fill (255,255,255);
   rect(spelerX+15, spelerY-13, 33, 7); // rechterarm
 
-  var img1;
-   function preload() {
-     img1 = loadImage('Ryan.png');
-   }
   image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
   
   fill (0, 0, 0);
   ellipse (spelerX, spelerY, 5, 5); // midden
+
+   // vijand / Dwayne Johnson
+
+    noStroke();
+  fill (140, 100, 77);
+  rect(vijandX-14, vijandY-20, 28, 65); // torso
+  
+  fill (50, 50, 50);
+  rect(vijandX -1, vijandY +22, 2, 23); // dubbelbeen
+
+  fill (140, 100, 77);
+  rect(vijandX-24, vijandY-18, 9, 33); // linkerarm
+
+  fill (140, 100, 77);
+  rect(vijandX+15, vijandY-18, 9, 33); // rechterarm
+
+  fill (140, 100, 77);
+  rect(vijandX-5, vijandY-28, 10, 33); // nek
+  
+  image(img2, vijandX -17, vijandY -63, 35, 42); // Dwayne
+
+  fill (0,0,0);
+  triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
   
   // kogel / Vuurbal
   fill (252, 100, 0);
@@ -220,7 +205,10 @@ var checkGameOver = function () {
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
-
+function preload (){
+  img1 = loadImage("afbeeldingen/Ryan.png")
+  img2 = loadImage("afbeeldingen/Rock.png")
+}
 /**
  * setup
  * de code in deze functie wordt één keer uitgevoerd door

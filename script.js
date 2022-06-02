@@ -13,10 +13,11 @@
 const SPELEN = 1;
 const GAMEOVER = 2;
 const START = 3;
+const LEVEL = 4;
 var spelStatus = START;
 
 
-var vijandX = 300; // x-positie van vijand
+var vijandX = 400; // x-positie van vijand
 var vijandY = 300; // y-positie van vijand
 
 var spelerX = 640; // x-positie van speler
@@ -54,51 +55,37 @@ var beweegAlles = function () {
 
   // kogel
 var kogelVliegt = false;
-var kogelSnelheid = 1;
+var kogelSnelheid = 2;
 
 var targetX;
 var targetY;
 
 var fireX;
 var fireY;
-
-var img1;
-var img2;
-  
-var richtingY = targetY - fireY;
-var richtingX = targetX - fireX;
-
-var correctieSnelheid = Math.sqrt(((richtingX * richtingX)+ (richtingY * richtingY))) / 1.412
-
-var snelheidX = richtingX / correctieSnelheid;
-var snelheidY = richtingY / correctieSnelheid;
-
-var snelheidX = richtingX / correctieSnelheid;
-var snelheidY = richtingY / correctieSnelheid;
-
-var snelheidX = richtingX / correctieSnelheid;
-var snelheidY = richtingY / correctieSnelheid;
   
   if (keyIsDown(32) && kogelVliegt === false) {
+    kogelVliegt = true;
     targetX = mouseX;
-    targetX = mouseY;
+    targetY = mouseY;
+    kogelX = fireX;
+    kogelY = fireY;
     fireX = spelerX;
     fireY= spelerY;
   }
 
+  var richtingX = targetX - fireX;
+  var richtingY = targetY - fireY;
 
-  
-  if (kogelVliegt === false && mouseIsPressed){
-    kogelVliegt = true;
-    kogelX = fireX;
-    kogelY = fireY;
-  }
+  var correctieSnelheid = Math.sqrt(((richtingX * richtingX)+ (richtingY * richtingY))) / 1.412
+
+  var snelheidX = richtingX / correctieSnelheid;
+  var snelheidY = richtingY / correctieSnelheid;
   
 if (kogelVliegt === true) {
-  kogelX = kogelX + kogelsnelheid * snelheidX;
+  kogelX = kogelX + kogelSnelheid * snelheidX;
 }
 if (kogelVliegt === true) {
-  kogelY = kogelY + kogelsnelheid * snelheidY;
+  kogelY = kogelY + kogelSnelheid * snelheidY;
 }
 
 if (kogelVliegt === true && kogelY < 0 ||
@@ -166,10 +153,6 @@ var tekenAlles = function () {
 
    // vijand / Dwayne Johnson
   var vijand = function() {
-
-  var vijandX = random(0, 1280); // x-positie van vijand
-  var vijandY = random(0, 720); // y-positie van vijand
-    
     noStroke();
   fill (140, 100, 77);
   rect(vijandX-14, vijandY-20, 28, 65); // torso
@@ -266,5 +249,12 @@ function draw() {
       spelerX=640;
       spelStatus = SPELEN;
     }
+  }
+  if (spelStatus === LEVEL) {
+    console.log("LEVEL += 1")
+    beweegAlles();
+    verwerkBotsing();
+    tekenAlles();
+    (vijand = vijand +1);
   }
 }

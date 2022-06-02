@@ -29,8 +29,8 @@ Basis: uitleg, spelen, afgaan en punten
 - [ ] x. zet punten op het scherm 
 - [ ] x. zorg dat je punten kunt scoren
 - [x] x. zorg dat je af kunt
-- [ ] x. maak game-over-scherm
-- [ ] x. maak uitlegscherm
+- [x] x. maak game-over-scherm
+- [x] x. maak uitlegscherm
 
 ### Uitbreidingen 1
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*

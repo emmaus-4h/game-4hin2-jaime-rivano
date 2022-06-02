@@ -12,31 +12,20 @@
 
 const SPELEN = 1;
 const GAMEOVER = 2;
-var spelStatus = SPELEN;
+const START = 3;
+var spelStatus = START;
 
 
-var spelerX = 400; // x-positie van speler
-var spelerY = 300; // y-positie van speler
-
-
-var vijand;
 var vijandX = 300; // x-positie van vijand
 var vijandY = 300; // y-positie van vijand
+
+var spelerX = 640; // x-positie van speler
+var spelerY = 360; // y-positie van speler
 
 var kogel;
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
-var kogelVliegt = false;
-var kogelSnelheid = 1;
 
-var targetX;
-var targetY;
-
-var fireX;
-var fireY;
-
-var img1;
-var img2;
 
 
 /* ********************************************* */
@@ -64,32 +53,46 @@ var beweegAlles = function () {
   // vijand
 
   // kogel
-  if (mouseIsPressed && kogelVliegt === false) {
+var kogelVliegt = false;
+var kogelSnelheid = 1;
+
+var targetX;
+var targetY;
+
+var fireX;
+var fireY;
+
+var img1;
+var img2;
+  
+var richtingY = targetY - fireY;
+var richtingX = targetX - fireX;
+
+var correctieSnelheid = Math.sqrt(((richtingX * richtingX)+ (richtingY * richtingY))) / 1.412
+
+var snelheidX = richtingX / correctieSnelheid;
+var snelheidY = richtingY / correctieSnelheid;
+
+var snelheidX = richtingX / correctieSnelheid;
+var snelheidY = richtingY / correctieSnelheid;
+
+var snelheidX = richtingX / correctieSnelheid;
+var snelheidY = richtingY / correctieSnelheid;
+  
+  if (keyIsDown(32) && kogelVliegt === false) {
     targetX = mouseX;
     targetX = mouseY;
     fireX = spelerX;
     fireY= spelerY;
   }
 
+
+  
   if (kogelVliegt === false && mouseIsPressed){
     kogelVliegt = true;
     kogelX = fireX;
     kogelY = fireY;
   }
-
-  var richtingY = targetY - fireY;
-  var richtingX = targetX - fireX;
-
-  var correctieSnelheid = Math.sqrt(((richtingX * richtingX)+ (richtingY * richtingY))) / 1.412
-
-  var snelheidX = richtingX / correctieSnelheid;
-  var snelheidY = richtingY / correctieSnelheid;
-
-  var snelheidX = richtingX / correctieSnelheid;
-  var snelheidY = richtingY / correctieSnelheid;
-
-var snelheidX = richtingX / correctieSnelheid;
-var snelheidY = richtingY / correctieSnelheid;
   
 if (kogelVliegt === true) {
   kogelX = kogelX + kogelsnelheid * snelheidX;
@@ -117,6 +120,7 @@ var verwerkBotsing = function () {
      vijandX - spelerX <36 &&
      spelerY - vijandY <59 &&
      vijandY - spelerY <59){
+    console.log("botsing")
     spelStatus = GAMEOVER;
   }
   // botsing kogel tegen vijand
@@ -161,7 +165,11 @@ var tekenAlles = function () {
   ellipse (spelerX, spelerY, 5, 5); // midden
 
    // vijand / Dwayne Johnson
+  var vijand = function() {
 
+  var vijandX = random(0, 1280); // x-positie van vijand
+  var vijandY = random(0, 720); // y-positie van vijand
+    
     noStroke();
   fill (140, 100, 77);
   rect(vijandX-14, vijandY-20, 28, 65); // torso
@@ -178,14 +186,19 @@ var tekenAlles = function () {
   fill (140, 100, 77);
   rect(vijandX-5, vijandY-28, 10, 33); // nek
   
-  image(img2, vijandX -17, vijandY -63, 35, 42); // Dwayne
+  image(img2, vijandX -13, vijandY -63, 35, 42); // Dwayne
 
   fill (0,0,0);
   triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
+  }
+
+  if (spelStatus === SPELEN){
+    vijand();
+  }
   
   // kogel / Vuurbal
   fill (252, 100, 0);
-  ellipse (kogelX, kogelY, 20, 20); // midden
+  ellipse (kogelX, kogelY, 20, 20); // bal
   
   // punten en health
 
@@ -205,9 +218,12 @@ var checkGameOver = function () {
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
-function preload (){
+function preload (){ //plaatjes
   img1 = loadImage("afbeeldingen/Ryan.png")
   img2 = loadImage("afbeeldingen/Rock.png")
+  img3 = loadImage("afbeeldingen/Intro.jpeg")
+  img4 = loadImage("afbeeldingen/Over.jpeg")
+  img5 = loadImage("afbeeldingen/Uitleg.jpeg")
 }
 /**
  * setup
@@ -229,13 +245,26 @@ function setup() {
  */
 function draw() {
   if (spelStatus === SPELEN) {
+    console.log("spelen")
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
   }
   if (spelStatus === GAMEOVER) {
-     fill("black");
-      rect(0,0,1280,720);
-    
+    console.log("game over")
+     image(img4, 0, 0, 1280, 720)
+    if(keyIsDown(32)){
+      spelerX=640;
+      spelStatus = START;
+    }
+  }
+
+  if (spelStatus === START) {
+    console.log("start")
+    image(img3, 0, 0, 1280, 720)
+    if(keyIsDown(32)){
+      spelerX=640;
+      spelStatus = SPELEN;
+    }
   }
 }

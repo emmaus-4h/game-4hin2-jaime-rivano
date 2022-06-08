@@ -24,7 +24,6 @@ var vijandY = 300; // y-positie van vijand
 var spelerX = 640; // x-positie van speler
 var spelerY = 360; // y-positie van speler
 
-var kogel;
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
 
@@ -79,7 +78,7 @@ var kogelSnelheid = 2;
 
 var targetX;
 var targetY;
-
+  
 var schietPlaatsX;
 var schietPlaatsY;
 
@@ -88,7 +87,7 @@ var spaceDownLast = false;
 
   spaceDownLast = spaceDownNu;
   spaceDownNu = keyIsDown(32);
-  if (spaceDownLast === false && spaceDownNu === true && kogelVliegt === false) {
+  if (spaceDownLast === false && spaceDownNu === false && kogelVliegt === false) {
     kogelVliegt = true;
     targetX = mouseX;
     targetY = mouseY;
@@ -106,15 +105,14 @@ var spaceDownLast = false;
   
 if (kogelVliegt === true) {
   kogelX = kogelX + kogelSnelheid * snelheidX;
-}
-if (kogelVliegt === true) {
   kogelY = kogelY + kogelSnelheid * snelheidY;
 }
 
-if (kogelVliegt === true && kogelY < 0 ||
-    kogelVliegt === true && kogelY > 720 ||
-    kogelVliegt === true && kogelX < 0 ||
-    kogelVliegt === true && kogelX > 1280){
+
+if (kogelVliegt === true && kogelX < 0 ||
+    kogelVliegt === true && kogelX > 1320 ||
+    kogelVliegt === true && kogelY < 0 ||
+    kogelVliegt === true && kogelY > 750){
       kogelVliegt = false;
     }
 };
@@ -221,9 +219,8 @@ var tekenAlles = function () {
   }
   
   // kogel / Vuurbal
-  fill (252, 100, 0);
-  ellipse (kogelX, kogelY, 20, 20); // bal
-  
+ fill("orange");
+  ellipse(kogelX, kogelY, 20, 20);
   // punten en health
 
 

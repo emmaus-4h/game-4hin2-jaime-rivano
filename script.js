@@ -26,8 +26,19 @@ var spelerY = 360; // y-positie van speler
 
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
+var richtingX = 0;
+var richtingY = 0;
+var kogelVliegt = false;
+var kogelSnelheid = 5;
 
+var targetX;
+var targetY;
+  
+var schietPlaatsX;
+var schietPlaatsY;
 
+var spaceDownNu = false;
+var spaceDownLast = false;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -53,7 +64,7 @@ var beweegAlles = function () {
 
   // vijand
   var vijandBeweegt = true;
-  var vijandSnelheid = 2;
+  var vijandSnelheid = 10;
   if (vijandBeweegt === false ){
     vijandBeweegt = true;
   }
@@ -73,42 +84,33 @@ var vijandSnelheidY = vijKantY / vijandCorrectieSnelheid;
   }
   
   // kogel
-var kogelVliegt = false;
-var kogelSnelheid = 2;
 
-var targetX;
-var targetY;
-  
-var schietPlaatsX;
-var schietPlaatsY;
-
-var spaceDownNu = false;
-var spaceDownLast = false;
 
   spaceDownLast = spaceDownNu;
   spaceDownNu = keyIsDown(32);
-  if (spaceDownLast === false && spaceDownNu === false && kogelVliegt === false) {
+
+  // start met vliegen
+  if (spaceDownLast === false && spaceDownNu === true && kogelVliegt === false) {
     kogelVliegt = true;
     targetX = mouseX;
     targetY = mouseY;
     kogelX = spelerX;
     kogelY = spelerY;
+    richtingX = targetX - spelerX;
+    richtingY = targetY - spelerY;
   }
 
-  var richtingX = targetX - spelerX;
-  var richtingY = targetY - spelerY;
-
+// aan het vliegen
+if (kogelVliegt === true) {
   var correctieSnelheid = Math.sqrt(((richtingX * richtingX)+ (richtingY * richtingY))) / 1.412
-
   var snelheidX = richtingX / correctieSnelheid;
   var snelheidY = richtingY / correctieSnelheid;
   
-if (kogelVliegt === true) {
   kogelX = kogelX + kogelSnelheid * snelheidX;
   kogelY = kogelY + kogelSnelheid * snelheidY;
 }
 
-
+// stoppen met vliegen
 if (kogelVliegt === true && kogelX < 0 ||
     kogelVliegt === true && kogelX > 1320 ||
     kogelVliegt === true && kogelY < 0 ||
@@ -219,8 +221,10 @@ var tekenAlles = function () {
   }
   
   // kogel / Vuurbal
+  if (kogelVliegt === true){
  fill("orange");
   ellipse(kogelX, kogelY, 20, 20);
+  }
   // punten en health
 
 

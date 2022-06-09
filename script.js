@@ -17,12 +17,18 @@ const INTRO = 4;
 const UITLEG = 5;
 var spelStatus = INTRO;
 
+var spelerX = 640; // x-positie van speler
+var spelerY = 360; // y-positie van speler
 
 var vijandX = 400; // x-positie van vijand
 var vijandY = 300; // y-positie van vijand
+var vijKantX = 0;
+var vijKantY = 0;
+var vijandBeweegt = false;
+var vijandSnelheid = 2;
 
-var spelerX = 640; // x-positie van speler
-var spelerY = 360; // y-positie van speler
+var vijandTargetX;
+var vijandTargetY;
 
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
@@ -63,23 +69,24 @@ var beweegAlles = function () {
   }
 
   // vijand
-  var vijandBeweegt = true;
-  var vijandSnelheid = 10;
-  if (vijandBeweegt === false ){
+
+  // start met bewegen
+    if (vijandBeweegt === false) {
     vijandBeweegt = true;
+    vijandTargetX = spelerX;
+    vijandTargetY = spelerY;
+    richtingX = vijandTargetX - spelerX;
+    richtingY = vijandTargetY - spelerY;
   }
-var vijKantX = spelerX - vijandX;
-var vijKantY = spelerY - vijandY;
-
-var vijandCorrectieSnelheid = Math.sqrt(((vijKantX * vijKantX)+ (vijKantY * vijKantY))) / 1.412
-
-var vijandSnelheidX = vijKantX / vijandCorrectieSnelheid;
-var vijandSnelheidY = vijKantY / vijandCorrectieSnelheid;
-
+  
+  // aan het bewegen
   if (vijandSnelheid === true) {
+    var vijandCorrectieSnelheid = Math.sqrt(((vijKantX * vijKantX)+ (vijKantY * vijKantY))) / 1.412
+    
+    var vijandSnelheidX = vijKantX / vijandCorrectieSnelheid;
+    var vijandSnelheidY = vijKantY / vijandCorrectieSnelheid;
+    
     vijandX = vijandX + vijandSnelheid * vijandSnelheidX;
-  }
-  if (vijandSnelheid === true) {
     vijandY = vijandY + vijandSnelheid * vijandSnelheidY;
   }
   

@@ -15,7 +15,7 @@ const GAMEOVER = 2;
 const LEVEL = 3;
 const INTRO = 4;
 const UITLEG = 5;
-var spelStatus = INTRO;
+var spelStatus = SPELEN;
 
 var spelerX = 640; // x-positie van speler
 var spelerY = 360; // y-positie van speler
@@ -101,8 +101,13 @@ var beweegAlles = function () {
     kogelVliegt = true;
     targetX = mouseX;
     targetY = mouseY;
-    kogelX = spelerX;
-    kogelY = spelerY;
+    if (keyIsDown(65)){
+     kogelX = spelerX -70;
+     kogelY = spelerY -25;
+    } else {
+     kogelX = spelerX +70;
+     kogelY = spelerY -25;
+    };
     richtingX = targetX - spelerX;
     richtingY = targetY - spelerY;
   }
@@ -179,19 +184,22 @@ var tekenAlles = function () {
   fill (50, 50, 50);
   rect(spelerX -1, spelerY +22, 2, 23); // dubbelbeen
 
-  if (keyIsDown(65)) {
+  if (keyIsDown(65)) { // kijk links
   fill (255,255,255);
-  rect(spelerX -48, spelerY -13, 33, 7); // if linkerarm
+  rect(spelerX -45, spelerY -13, 30, 7); // linkerarm <
 
   fill (255,255,255);
-  rect(spelerX +22, spelerY -13, -7, 33); // if rechterarm
-  } else {
-  
+  rect(spelerX +22, spelerY -13, -7, 33); // rechterarm V
+
+  image(img7, spelerX -70, spelerY -25, 25, 20) // wapen <
+  } else { // kijk rechts
   fill (255,255,255);
-  rect(spelerX-22, spelerY-13, 7, 33); // else linkerarm
+  rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
 
   fill (255,255,255);
-  rect(spelerX+15, spelerY-13, 33, 7); // else rechterarm
+  rect(spelerX+15, spelerY-13, 30, 7); // rechterarm >
+    
+  image(img8, spelerX +42, spelerY -25, 28, 20) // wapen >
   }
 
   image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
@@ -257,6 +265,8 @@ function preload (){ //plaatjes
   img4 = loadImage("afbeeldingen/Over.jpeg")
   img5 = loadImage("afbeeldingen/Uitleg.jpeg")
   img6 = loadImage("afbeeldingen/Achter.jpg")
+  img7 = loadImage("afbeeldingen/WapenLinks.png")
+  img8 = loadImage("afbeeldingen/WapenRechts.png")
 }
 /**
  * setup

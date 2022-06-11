@@ -184,6 +184,11 @@ var tekenAlles = function () {
   fill (50, 50, 50);
   rect(spelerX -1, spelerY +22, 2, 23); // dubbelbeen
 
+  image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
+  
+  fill (0, 0, 0);
+  ellipse (spelerX, spelerY, 5, 5); // midden
+
   if (keyIsDown(65)) { // kijk links
   fill (255,255,255);
   rect(spelerX -45, spelerY -13, 30, 7); // linkerarm <
@@ -195,17 +200,20 @@ var tekenAlles = function () {
   } else { // kijk rechts
   fill (255,255,255);
   rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
+  }
+
+  if (keyIsDown(68)) { // kijk links
+  fill (255,255,255);
+  rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
 
   fill (255,255,255);
   rect(spelerX+15, spelerY-13, 30, 7); // rechterarm >
     
   image(img8, spelerX +42, spelerY -25, 28, 20) // wapen >
+  } else { // kijk rechts
+  fill (255,255,255);
+  rect(spelerX+15, spelerY-13, 7, 33); // rechterarm V
   }
-
-  image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
-  
-  fill (0, 0, 0);
-  ellipse (spelerX, spelerY, 5, 5); // midden
 
    // vijand / Dwayne Johnson
   var vijand = function() {
@@ -235,10 +243,12 @@ var tekenAlles = function () {
     vijand();
   }
   
-  // kogel / Vuurbal
-  if (kogelVliegt === true){
- fill("orange");
-  ellipse(kogelX, kogelY, 20, 20);
+  // (Nerf) kogel
+  if (kogelVliegt === true && spelerX > mouseX){
+  image(img9, kogelX, kogelY, 20, 10);
+  }
+  if (kogelVliegt === true && spelerX < mouseX){
+  image(img10, kogelX, kogelY, 20, 10);
   }
   // punten en health
 
@@ -267,6 +277,8 @@ function preload (){ //plaatjes
   img6 = loadImage("afbeeldingen/Achter.jpg")
   img7 = loadImage("afbeeldingen/WapenLinks.png")
   img8 = loadImage("afbeeldingen/WapenRechts.png")
+  img9 = loadImage("afbeeldingen/KogelLinks.png")
+  img10 = loadImage("afbeeldingen/KogelRechts.png")
 }
 /**
  * setup

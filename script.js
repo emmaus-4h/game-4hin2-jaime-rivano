@@ -69,7 +69,7 @@ var beweegAlles = function () {
   }
 
   // vijand
-
+  
   // start met bewegen
     if (vijandBeweegt === false) {
     vijandBeweegt = true;
@@ -174,68 +174,64 @@ var tekenAlles = function () {
   noStroke();
   fill (242, 204, 183);
   rect(spelerX -5, spelerY -28, 10, 33); // nek
+
+  image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
   
-  fill (255,255,255);
+  fill ("white");
   rect(spelerX -14, spelerY -15, 28, 30); // torso
   
-  fill (0, 0, 0);
+  fill ("black");
+  rect(spelerX-2, spelerY-13, 4, 23); // stropdas
+
+  triangle(spelerX-2, spelerY+10, spelerX +2, spelerY +10, spelerX, spelerY +13); // stropdas onderkant
+  
+  fill ("black");
   rect(spelerX -14, spelerY +15, 28, 30); // benen
 
   fill (50, 50, 50);
   rect(spelerX -1, spelerY +22, 2, 23); // dubbelbeen
 
-  image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
-  
-  fill (0, 0, 0);
-  ellipse (spelerX, spelerY, 5, 5); // midden
-
-  if (keyIsDown(65)) { // kijk links
-  fill (255,255,255);
+  // armen en wapen
+  if (spelerX > vijandX) { // kijk links
+  fill ("white");
   rect(spelerX -45, spelerY -13, 30, 7); // linkerarm <
 
-  fill (255,255,255);
+  fill ("white");
   rect(spelerX +22, spelerY -13, -7, 33); // rechterarm V
 
   image(img7, spelerX -70, spelerY -25, 25, 20) // wapen <
   } else { // kijk rechts
-  fill (255,255,255);
-  rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
-  }
-
-  if (keyIsDown(68)) { // kijk links
-  fill (255,255,255);
+  fill ("white");
   rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
 
-  fill (255,255,255);
+  fill ("white");
   rect(spelerX+15, spelerY-13, 30, 7); // rechterarm >
     
   image(img8, spelerX +42, spelerY -25, 28, 20) // wapen >
-  } else { // kijk rechts
-  fill (255,255,255);
-  rect(spelerX+15, spelerY-13, 7, 33); // rechterarm V
   }
 
    // vijand / Dwayne Johnson
+  var rock= color(140, 100, 77);
   var vijand = function() {
     noStroke();
-  fill (140, 100, 77);
-  rect(vijandX -14, vijandY -20, 28, 65); // torso
+  fill (rock);
+  rect(vijandX -14, vijandY -20, 28, 65); // lichaam
   
   fill (50, 50, 50);
   rect(vijandX -1, vijandY +22, 2, 23); // dubbelbeen
 
-  fill (140, 100, 77);
+  fill (rock);
   rect(vijandX -24, vijandY -18, 9, 33); // linkerarm
 
-  fill (140, 100, 77);
+  fill (rock);
   rect(vijandX +15, vijandY -18, 9, 33); // rechterarm
 
-  fill (140, 100, 77);
+  fill (rock);
   rect(vijandX -5, vijandY -28, 10, 33); // nek
   
   image(img2, vijandX -13, vijandY -63, 35, 42); // Dwayne
 
-  fill (0,0,0);
+  fill ("black");
   triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
   }
 

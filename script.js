@@ -12,24 +12,26 @@
 
 const SPELEN = 1;
 const GAMEOVER = 2;
-const LEVEL = 3;
-const INTRO = 4;
-const UITLEG = 5;
+const INTRO = 3;
+const UITLEG = 4;
 var spelStatus = SPELEN;
 
 var spelerX = 640; // x-positie van speler
 var spelerY = 360; // y-positie van speler
 
+// vijand
+var vijand;
 var vijandX = 400; // x-positie van vijand
 var vijandY = 300; // y-positie van vijand
 var vijKantX = 0;
 var vijKantY = 0;
+var vijandLeeft = true;
 var vijandBeweegt = false;
 var vijandSnelheid = 2;
-
 var vijandTargetX;
 var vijandTargetY;
 
+// kogel
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
 var richtingX = 0;
@@ -101,7 +103,7 @@ var beweegAlles = function () {
     kogelVliegt = true;
     targetX = mouseX;
     targetY = mouseY;
-    if (keyIsDown(65)){
+    if (spelerX > 640){
      kogelX = spelerX -70;
      kogelY = spelerY -25;
     } else {
@@ -146,7 +148,20 @@ var verwerkBotsing = function () {
     spelStatus = GAMEOVER;
   }
   // botsing kogel tegen vijand
-  
+  if (kogelX - vijandX <33 &&
+     vijandX - kogelX <33 &&
+     kogelY - vijandY <55 &&
+     vijandY - kogelY <55){
+    vijandleeft = false;
+    console.log("Rock neer")
+  }
+
+  if (vijandLeeft === false) {
+      vijandLeeft = true;
+    vijandX = random(100, 1170);
+    vijandY = random(150, 575);
+    vijand();
+  }
   // bomen
     if (spelerX > 100) {
     spelerX = spelerX -2;
@@ -167,25 +182,31 @@ var verwerkBotsing = function () {
  * Tekent spelscherm
  */
 var tekenAlles = function () {
+  //kleuren
+  var wit= color(255, 255, 255);
+  var zwart= color(0, 0, 0);
+  var ryan= color(242, 204, 183);
+  var rock= color(140, 100, 77);
+  
   // achtergrond
   image(img6, 0, 0, 1280, 720)
 
   // speler / Ryan Reynolds
   noStroke();
-  fill (242, 204, 183);
+  fill (ryan);
   rect(spelerX -5, spelerY -28, 10, 33); // nek
 
   image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
   
-  fill ("white");
+  fill (wit);
   rect(spelerX -14, spelerY -15, 28, 30); // torso
   
-  fill ("black");
-  rect(spelerX-2, spelerY-13, 4, 23); // stropdas
+  fill (zwart);
+  rect(spelerX-2, spelerY-13, 4, 21); // stropdas
 
-  triangle(spelerX-2, spelerY+10, spelerX +2, spelerY +10, spelerX, spelerY +13); // stropdas onderkant
+  triangle(spelerX-2, spelerY+8, spelerX +2, spelerY +8, spelerX, spelerY +11); // stropdas onderkant
   
-  fill ("black");
+  fill (zwart);
   rect(spelerX -14, spelerY +15, 28, 30); // benen
 
   fill (50, 50, 50);
@@ -193,26 +214,25 @@ var tekenAlles = function () {
 
   // armen en wapen
   if (spelerX > vijandX) { // kijk links
-  fill ("white");
+  fill (wit);
   rect(spelerX -45, spelerY -13, 30, 7); // linkerarm <
 
-  fill ("white");
+  fill (wit);
   rect(spelerX +22, spelerY -13, -7, 33); // rechterarm V
 
   image(img7, spelerX -70, spelerY -25, 25, 20) // wapen <
   } else { // kijk rechts
-  fill ("white");
+  fill (wit);
   rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
 
-  fill ("white");
+  fill (wit);
   rect(spelerX+15, spelerY-13, 30, 7); // rechterarm >
     
   image(img8, spelerX +42, spelerY -25, 28, 20) // wapen >
   }
 
    // vijand / Dwayne Johnson
-  var rock= color(140, 100, 77);
-  var vijand = function() {
+  vijand = function(vijandX, vijandY) {
     noStroke();
   fill (rock);
   rect(vijandX -14, vijandY -20, 28, 65); // lichaam
@@ -231,14 +251,11 @@ var tekenAlles = function () {
   
   image(img2, vijandX -13, vijandY -63, 35, 42); // Dwayne
 
-  fill ("black");
+  fill (zwart);
   triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
   }
 
-  if (spelStatus === SPELEN){
-    vijand();
-  }
-  
+    
   // (Nerf) kogel
   if (kogelVliegt === true && spelerX > mouseX){
   image(img9, kogelX, kogelY, 20, 10);
@@ -248,17 +265,6 @@ var tekenAlles = function () {
   }
   // punten en health
 
-
-  // opstakels
-};
-
-/**
- * return true als het gameover is
- * anders return false
- */
-var checkGameOver = function () {
-  // check of HP 0 is , of tijd op is, of ...
-  return false;
 };
 
 /* ********************************************* */
@@ -282,10 +288,8 @@ function preload (){ //plaatjes
  * de p5 library, zodra het spel geladen is in de browser
  */
 function setup() {
-  // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
-
-  // Kleur de achtergrond blauw, zodat je het kunt zien
+  
   background('blue');
 }
 
@@ -300,8 +304,9 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
+    vijand();
   }
-  
+    
   if (spelStatus === GAMEOVER) {
     console.log("game over")
      image(img4, 0, 0, 1280, 720)
@@ -309,14 +314,6 @@ function draw() {
       spelerX=640;
       spelStatus = INTRO;
     }
-  }
-
-  if (spelStatus === LEVEL) {
-    console.log("LEVEL += 1")
-    beweegAlles();
-    verwerkBotsing();
-    tekenAlles();
-    (vijand = vijand +1);
   }
 
   if (spelStatus === INTRO) {

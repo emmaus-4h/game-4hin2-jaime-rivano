@@ -16,22 +16,34 @@ const INTRO = 3;
 const UITLEG = 4;
 var spelStatus = SPELEN;
 
+var add = function(num1, num2) {
+    return num1 + num2;
+};
+var subtract = function(num1, num2) {
+    return num1 - num2;
+};
+var multiply = function(num1, num2) {
+    return num1 * num2;
+};
+var divide = function(num1, num2) {
+    return num1 / num2;
+};
+
 var spelerX = 640; // x-positie van speler
 var spelerY = 360; // y-positie van speler
 
-// vijand
 var vijand;
-var vijandX = 400; // x-positie van vijand
-var vijandY = 300; // y-positie van vijand
+var vijandX = 2000; // x-positie van vijand
+var vijandY = 2000; // y-positie van vijand
 var vijKantX = 0;
 var vijKantY = 0;
-var vijandLeeft = true;
+var vijandLeeft= false;
 var vijandBeweegt = false;
 var vijandSnelheid = 2;
 var vijandTargetX;
 var vijandTargetY;
+var vijandNeer = -1;
 
-// kogel
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
 var richtingX = 0;
@@ -103,7 +115,7 @@ var beweegAlles = function () {
     kogelVliegt = true;
     targetX = mouseX;
     targetY = mouseY;
-    if (spelerX > 640){
+    if (spelerX > mouseX){
      kogelX = spelerX -70;
      kogelY = spelerY -25;
     } else {
@@ -147,21 +159,17 @@ var verwerkBotsing = function () {
     console.log("botsing")
     spelStatus = GAMEOVER;
   }
+  
   // botsing kogel tegen vijand
-  if (kogelX - vijandX <33 &&
-     vijandX - kogelX <33 &&
+  if (kogelX - vijandX <5 &&
+     vijandX - kogelX <5 &&
      kogelY - vijandY <55 &&
      vijandY - kogelY <55){
-    vijandleeft = false;
-    console.log("Rock neer")
+    console.log("HIT")
+    vijandLeeft = false;
+    kogelVliegt = false; 
   }
-
-  if (vijandLeeft === false) {
-      vijandLeeft = true;
-    vijandX = random(100, 1170);
-    vijandY = random(150, 575);
-    vijand();
-  }
+  
   // bomen
     if (spelerX > 100) {
     spelerX = spelerX -2;
@@ -182,60 +190,62 @@ var verwerkBotsing = function () {
  * Tekent spelscherm
  */
 var tekenAlles = function () {
-  //kleuren
-  var wit= color(255, 255, 255);
-  var zwart= color(0, 0, 0);
-  var ryan= color(242, 204, 183);
-  var rock= color(140, 100, 77);
-  
   // achtergrond
   image(img6, 0, 0, 1280, 720)
 
   // speler / Ryan Reynolds
   noStroke();
-  fill (ryan);
+  fill (242, 204, 183);
   rect(spelerX -5, spelerY -28, 10, 33); // nek
 
   image(img1, spelerX -17, spelerY -59, 35, 42); // Ryan
   
-  fill (wit);
+  fill ("white");
   rect(spelerX -14, spelerY -15, 28, 30); // torso
   
-  fill (zwart);
-  rect(spelerX-2, spelerY-13, 4, 21); // stropdas
+  fill ("black");
+  rect(spelerX-2, spelerY-13, 4, 23); // stropdas
 
-  triangle(spelerX-2, spelerY+8, spelerX +2, spelerY +8, spelerX, spelerY +11); // stropdas onderkant
+  triangle(spelerX-2, spelerY+10, spelerX +2, spelerY +10, spelerX, spelerY +13); // stropdas onderkant
   
-  fill (zwart);
+  fill ("black");
   rect(spelerX -14, spelerY +15, 28, 30); // benen
 
   fill (50, 50, 50);
   rect(spelerX -1, spelerY +22, 2, 23); // dubbelbeen
 
   // armen en wapen
-  if (spelerX > vijandX) { // kijk links
-  fill (wit);
+  if (spelerX > mouseX) { // kijk links
+  fill ("white");
   rect(spelerX -45, spelerY -13, 30, 7); // linkerarm <
 
-  fill (wit);
+  fill ("white");
   rect(spelerX +22, spelerY -13, -7, 33); // rechterarm V
 
   image(img7, spelerX -70, spelerY -25, 25, 20) // wapen <
   } else { // kijk rechts
-  fill (wit);
+  fill ("white");
   rect(spelerX-22, spelerY-13, 7, 33); // linkerarm V
 
-  fill (wit);
+  fill ("white");
   rect(spelerX+15, spelerY-13, 30, 7); // rechterarm >
     
   image(img8, spelerX +42, spelerY -25, 28, 20) // wapen >
   }
 
    // vijand / Dwayne Johnson
-  vijand = function(vijandX, vijandY) {
+  var rock= color(190, 130, 101);
+  vijand = function() {
     noStroke();
+    fill (rock);
+  rect(vijandX -10, vijandY -28, 21, 33); // nek
+
+  image(img2, vijandX -17, vijandY -63, 35, 42); // Dwayne
+    
   fill (rock);
   rect(vijandX -14, vijandY -20, 28, 65); // lichaam
+
+  image(img11, vijandX -14, vijandY -20, 28, 32); // torso
   
   fill (50, 50, 50);
   rect(vijandX -1, vijandY +22, 2, 23); // dubbelbeen
@@ -246,16 +256,17 @@ var tekenAlles = function () {
   fill (rock);
   rect(vijandX +15, vijandY -18, 9, 33); // rechterarm
 
-  fill (rock);
-  rect(vijandX -5, vijandY -28, 10, 33); // nek
-  
-  image(img2, vijandX -13, vijandY -63, 35, 42); // Dwayne
-
-  fill (zwart);
+  fill ("black");
   triangle(vijandX -15, vijandY +13, vijandX +15, vijandY +13, vijandX, vijandY +23); // speedo
   }
 
-    
+  if (vijandLeeft === false){
+    vijandLeeft = true;
+    vijandX = random(0, 1280);
+    vijandY = random(0, 640);
+    vijandNeer = vijandNeer + 1;
+  }
+  
   // (Nerf) kogel
   if (kogelVliegt === true && spelerX > mouseX){
   image(img9, kogelX, kogelY, 20, 10);
@@ -264,7 +275,18 @@ var tekenAlles = function () {
   image(img10, kogelX, kogelY, 20, 10);
   }
   // punten en health
+  textSize(100);
+  text(add(0, vijandNeer), 50, 100);
+  // opstakels
+};
 
+/**
+ * return true als het gameover is
+ * anders return false
+ */
+var checkGameOver = function () {
+  // check of HP 0 is , of tijd op is, of ...
+  return false;
 };
 
 /* ********************************************* */
@@ -281,6 +303,7 @@ function preload (){ //plaatjes
   img8 = loadImage("afbeeldingen/WapenRechts.png")
   img9 = loadImage("afbeeldingen/KogelLinks.png")
   img10 = loadImage("afbeeldingen/KogelRechts.png")
+  img11 = loadImage("afbeeldingen/Buik.jpg")
 }
 /**
  * setup
@@ -288,8 +311,10 @@ function preload (){ //plaatjes
  * de p5 library, zodra het spel geladen is in de browser
  */
 function setup() {
+  // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
-  
+
+  // Kleur de achtergrond blauw, zodat je het kunt zien
   background('blue');
 }
 
@@ -305,8 +330,10 @@ function draw() {
     verwerkBotsing();
     tekenAlles();
     vijand();
+    vijand();
+    vijand();
   }
-    
+  
   if (spelStatus === GAMEOVER) {
     console.log("game over")
      image(img4, 0, 0, 1280, 720)

@@ -9,54 +9,47 @@
 /* ********************************************* */
 /* globale variabelen die je gebruikt in je game */
 /* ********************************************* */
-
+//spel
 const SPELEN = 1;
 const GAMEOVER = 2;
 const INTRO = 3;
 const UITLEG = 4;
-var spelStatus = SPELEN;
+var spelStatus = INTRO;
 
+// wiskunde
 var add = function(num1, num2) {
     return num1 + num2;
 };
-var subtract = function(num1, num2) {
-    return num1 - num2;
-};
-var multiply = function(num1, num2) {
-    return num1 * num2;
-};
-var divide = function(num1, num2) {
-    return num1 / num2;
+var substract = function(num1, num2) {
+    return num1 + num2;
 };
 
+//speler
 var spelerX = 640; // x-positie van speler
 var spelerY = 360; // y-positie van speler
 
+//vijand
 var vijand;
-var vijandX = 2000; // x-positie van vijand
-var vijandY = 2000; // y-positie van vijand
+var vijandX = 300; // x-positie van vijand
+var vijandY = 300; // y-positie van vijand
 var vijKantX = 0;
 var vijKantY = 0;
-var vijandLeeft= false;
-var vijandBeweegt = false;
-var vijandSnelheid = 2;
-var vijandTargetX;
-var vijandTargetY;
 var vijandNeer = -1;
+var vijandLeeft= false;
+var vijandBeweegt = true;
+var vijandSnelheid = 2;
 
+//kogel
 var kogelX = 500; // x-positie van kogel
 var kogelY = 300; // y-positie van kogel
 var richtingX = 0;
 var richtingY = 0;
 var kogelVliegt = false;
 var kogelSnelheid = 5;
-
 var targetX;
 var targetY;
-  
 var schietPlaatsX;
 var schietPlaatsY;
-
 var spaceDownNu = false;
 var spaceDownLast = false;
 
@@ -69,44 +62,38 @@ var spaceDownLast = false;
  */
 var beweegAlles = function () {
   // speler
-  if (keyIsDown(68)) {
-    spelerX = spelerX +2;
+  if (keyIsDown(68) || keyIsDown(39)) { //links: D of >
+    spelerX = spelerX +5;
   }
-  if (keyIsDown(65)) {
-    spelerX = spelerX -2;
+  if (keyIsDown(65) || keyIsDown(37)) { //rechts: A of <
+    spelerX = spelerX -5;
   }
-  if (keyIsDown(83)) {
-    spelerY = spelerY +2;
+  if (keyIsDown(83) || keyIsDown(40)) { //onder: S of V
+    spelerY = spelerY +5;
   }
-  if (keyIsDown(87)) {
-    spelerY = spelerY -2;
+  if (keyIsDown(87) || keyIsDown(38)) { //boven: W of ^
+    spelerY = spelerY -5;
   }
 
   // vijand
   
   // start met bewegen
-    if (vijandBeweegt === false) {
-    vijandBeweegt = true;
-    vijandTargetX = spelerX;
-    vijandTargetY = spelerY;
-    richtingX = vijandTargetX - spelerX;
-    richtingY = vijandTargetY - spelerY;
-  }
+    vijKantX = spelerX - vijandX;
+    vijKantY = spelerY - vijandY;
   
-  // aan het bewegen
-  if (vijandSnelheid === true) {
+   //aan het bewegen
+
     var vijandCorrectieSnelheid = Math.sqrt(((vijKantX * vijKantX)+ (vijKantY * vijKantY))) / 1.412
     
     var vijandSnelheidX = vijKantX / vijandCorrectieSnelheid;
     var vijandSnelheidY = vijKantY / vijandCorrectieSnelheid;
-    
+
+  if (vijandBeweegt === true){
     vijandX = vijandX + vijandSnelheid * vijandSnelheidX;
     vijandY = vijandY + vijandSnelheid * vijandSnelheidY;
   }
   
   // kogel
-
-
   spaceDownLast = spaceDownNu;
   spaceDownNu = keyIsDown(32);
 
@@ -167,7 +154,9 @@ var verwerkBotsing = function () {
      vijandY - kogelY <55){
     console.log("HIT")
     vijandLeeft = false;
-    kogelVliegt = false; 
+    kogelVliegt = false;
+    kogelX = 3000;
+    kogelY = 3000;
   }
   
   // bomen
@@ -336,9 +325,18 @@ function draw() {
   
   if (spelStatus === GAMEOVER) {
     console.log("game over")
-     image(img4, 0, 0, 1280, 720)
-    if(keyIsDown(32)){
+    image(img4, 0, 0, 1280, 720); //plaatje
+    fill("white");
+    textAlign(CENTER);
+    textSize(50);
+    text("SCORE", 640, 360); //score
+    textSize(90);
+    text(vijandNeer, 640, 440);
+    if(keyIsDown(32)){ //terug naar begin
       spelerX=640;
+      vijandX= random(0, 1280);
+      vijandY= random(0, 720);
+      vijandNeer = 0;
       spelStatus = INTRO;
     }
   }

@@ -26,16 +26,16 @@ Basis: uitleg, spelen, afgaan en punten
 - [x] x. teken een bal, kogel (als die in je spel zit)
 - [x] x. beweeg de tegenspeler
 - [x] x. beweeg de kogel
-- [ ] x. zet punten op het scherm 
-- [ ] x. zorg dat je punten kunt scoren
+- [x] x. zet punten op het scherm 
+- [x] x. zorg dat je punten kunt scoren
 - [x] x. zorg dat je af kunt
 - [x] x. maak game-over-scherm
 - [x] x. maak uitlegscherm
 
 ### Uitbreidingen 1
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
-- [ ] *later uitwerken*
-- [ ] *later uitwerken*
+- [ ] als tegenstander dood gaat, maak er 2 meer
+- [ ] zorg dat tegenstander richting speler loopt
 - [ ] *later uitwerken*
 
 ### Uitbreidingen 2
@@ -46,8 +46,8 @@ Uitbreiding: *bedenk iets, bijvoorbeeld bewegende achtergrond*
 
 ### Ideeen voor uitbreidingen
 Kies de uitbreidingen die je leuk vindt en maak je game nog mooier
-- [ ] Gebruik plaatjes voor de vijanden
-- [ ] Animeer speler
+- [x] Gebruik plaatjes voor de vijanden
+- [x] Animeer speler
 - [ ] Laat badges vallen die extra's aan speler geven
 - [ ] Maak spel steeds moeilijker door toenemend aantal vijanden met tekenVijand
 - [ ] Maak andere vijanden bij toenemen tekenVijand

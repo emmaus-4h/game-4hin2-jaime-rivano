@@ -21,7 +21,7 @@ Basis: uitleg, spelen, afgaan en punten
         - Zet je code in de functie beweegAlles()
         - Kies de afmeting van speler
         - Gebruik variabalen spelerX en spelerY als middelpunt van de speler
-- [ ] 4. *(pas de volgende stappen in de planning zelf aan)*
+- [x] 4. *(pas de volgende stappen in de planning zelf aan)*
 - [x] x. teken je tegenspeler (vijanden of dingen die je moet pakken of doelen of ...)
 - [x] x. teken een bal, kogel (als die in je spel zit)
 - [x] x. beweeg de tegenspeler
@@ -34,8 +34,7 @@ Basis: uitleg, spelen, afgaan en punten
 
 ### Uitbreidingen 1
 Uitbreiding: *bedenk iets, bijvoorbeeld meer tegenstanders*
-- [ ] als tegenstander dood gaat, maak er 2 meer
-- [ ] zorg dat tegenstander richting speler loopt
+- [x] zorg dat tegenstander richting speler loopt
 - [ ] *later uitwerken*
 
 ### Uitbreidingen 2
